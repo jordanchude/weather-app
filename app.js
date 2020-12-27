@@ -9,5 +9,17 @@ const url = 'http://api.weatherstack.com/current?access_key=76d4262f3cad2ae3626e
 
 // parse json in request and set to request body
 request({ url: url, json: true }, (error, response) => {
-    console.log(`It is currently ${response.body.current.temperature}° degrees out. It feels like ${response.body.current.feelslike}° degrees out.`);
+    console.log(`${response.body.current.weather_descriptions[0]}. It is currently ${response.body.current.temperature}° degrees out. It feels like ${response.body.current.feelslike}° degrees out.`);
 });
+
+// Geocoding
+// Address -> Lat/Long -> Weather
+
+const geocodeURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiamN3aWxsaWFtczQxMCIsImEiOiJja2o3ZG05eG0xNGx2MzFueTZkZXFyeXJ0In0.d_-kzjgvIFqHzE-T2CaNtw&limit=1'
+
+request({url: geocodeURL, json: true}, (error, response) => {
+    const latitude = response.body.features[0].center[1];
+    const longitude = response.body.features[0].center[0];
+
+    console.log(latitude, longitude);
+})
