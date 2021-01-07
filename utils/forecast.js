@@ -12,10 +12,9 @@ const forecast = (latitude, longitude, callback) => {
         } else if (response.body.error) {
             callback('Unable to find coordinates', undefined)
         } else {
-            callback(undefined, `${response.body.location.name}. It is currently ${response.body.current.temperature}° degrees out and ${response.body.current.weather_descriptions}. It feels like ${response.body.current.feelslike} °degrees out.`)
+            callback(undefined, `It is currently ${response.body.current.temperature}° degrees out and ${response.body.current.weather_descriptions}. It feels like ${response.body.current.feelslike} °degrees out.`)
         }
     })
-    console.log(url);
 }
 
 module.exports = forecast
