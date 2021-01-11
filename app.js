@@ -9,18 +9,19 @@ if (!address) {
   console.log("Please enter a location.")
 } else {
   // chained callback
-  geocode(address, (error, data) => {
+  // Default parameter for latitude, longitude, and location is de-structured from an empty object, making them all undefined
+  geocode(address, (error, {latitude, longitude, location} = {}) => {
     // if error, stop function
     if (error) {
       return console.log(error)
     }
     
-      forecast(data.latitude, data.longitude, (error, forecastData) => {
+      forecast(latitude, longitude, (error, forecastData) => {
         if (error) {
           return console.log(error)
         }
 
-        console.log(data.location)
+        console.log(location)
         console.log(forecastData)
     })
   })
